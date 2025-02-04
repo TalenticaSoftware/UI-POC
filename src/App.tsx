@@ -1,30 +1,33 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Box, ChakraProvider, Flex } from "@chakra-ui/react";
 import React from "react";
+import Header from "./components/header.tsx";
+import Footer from "./components/footer.tsx";
+import About from "./pages/about.tsx";
+import Contact from "./pages/contact.tsx";
+import Home from "./pages/home.tsx";
+import theme from "./theme.ts";
+import Blog from "./pages/blog.tsx";
 
-import "./App.css";
-import { Button } from "@chakra-ui/react";
-
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> hiiiiiiiiiiiiiiiii and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        Chakra UI Buttonasdaf
-        <Button colorScheme="teal" size="lg" mt={4}>
-          Chakra UI Button
-        </Button>
-      </header>
-    </div>
+    <ChakraProvider theme={theme}>
+      <Router>
+        <Box>
+          <Header />
+
+          <Flex direction="column" h="calc(100vh - 82px)" overflow={"auto"}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/blog/:id" element={<Blog />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </Flex>
+        </Box>
+      </Router>
+    </ChakraProvider>
   );
-}
+};
 
 export default App;
