@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/UI-POC/application2/static/css/main.45bfa0d4.css",
+    "main.js": "/UI-POC/application2/static/js/main.192689ff.js",
+    "static/js/488.ffe19f03.chunk.js": "/UI-POC/application2/static/js/488.ffe19f03.chunk.js",
+    "index.html": "/UI-POC/application2/index.html",
+    "main.45bfa0d4.css.map": "/UI-POC/application2/static/css/main.45bfa0d4.css.map",
+    "main.192689ff.js.map": "/UI-POC/application2/static/js/main.192689ff.js.map",
+    "488.ffe19f03.chunk.js.map": "/UI-POC/application2/static/js/488.ffe19f03.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.45bfa0d4.css",
+    "static/js/main.192689ff.js"
+  ]
+}
