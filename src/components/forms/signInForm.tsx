@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Flex,
   Box,
@@ -14,6 +14,62 @@ import {
 } from "@chakra-ui/react";
 
 const SignInForm: React.FC = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    contact: "",
+    rememberMe: false,
+  });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    contact: "",
+  });
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    if (name === "email") {
+      setErrors((prev) => ({
+        ...prev,
+        email: validateEmail(value) ? "" : "Invalid email format",
+      }));
+    }
+
+    if (name === "contact") {
+      if (!/^\d*$/.test(value)) {
+        setErrors((prev) => ({ ...prev, contact: "Only numbers are allowed" }));
+      } else if (value.length !== 10) {
+        setErrors((prev) => ({
+          ...prev,
+          contact: "Contact must be exactly 10 digits",
+        }));
+      } else {
+        setErrors((prev) => ({ ...prev, contact: "" }));
+      }
+    }
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    let newErrors = { email: "", contact: "" };
+
+    if (!validateEmail(formData.email))
+      newErrors.email = "Invalid email format";
+    if (formData.contact.length !== 10)
+      newErrors.contact = "Contact must be exactly 10 digits";
+
+    setErrors(newErrors);
+    if (newErrors.email || newErrors.contact) return;
+
+    console.log("Form submitted", formData);
+  };
+
   return (
     <Flex
       align="center"
@@ -22,9 +78,9 @@ const SignInForm: React.FC = () => {
     >
       <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
         <Stack align="center">
-          <Heading fontSize="4xl">Sign in to your account</Heading>
+          <Heading fontSize="4xl">Contact Form</Heading>
           <Text fontSize="lg" color="gray.600">
-            to enjoy all of our cool{" "}
+            To enjoy all of our cool{" "}
             <Text as="span" color="blue.400">
               features
             </Text>{" "}
@@ -37,31 +93,69 @@ const SignInForm: React.FC = () => {
           boxShadow="lg"
           p={8}
         >
-          <Stack spacing={4}>
-            <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input type="password" />
-            </FormControl>
-            <Stack spacing={10}>
-              <Stack
-                direction={{ base: "column", sm: "row" }}
-                align="start"
-                justify="space-between"
-              >
-                <Checkbox>Remember me</Checkbox>
-                <Text color="blue.400" cursor="pointer">
-                  Forgot password?
-                </Text>
+          <form onSubmit={handleSubmit}>
+            <Stack spacing={4}>
+              <FormControl id="email" isInvalid={!!errors.email}>
+                <FormLabel>Email address</FormLabel>
+                <Input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                {errors.email && (
+                  <Text color="red.500" align={"left"} fontSize="sm">
+                    {errors.email}
+                  </Text>
+                )}
+              </FormControl>
+
+              <FormControl id="contact" isInvalid={!!errors.contact}>
+                <FormLabel>Contact</FormLabel>
+                <Input
+                  type="text"
+                  name="contact"
+                  value={formData.contact}
+                  onChange={handleChange}
+                  maxLength={10}
+                  required
+                />
+                {errors.contact && (
+                  <Text color="red.500" align={"left"} fontSize="sm">
+                    {errors.contact}
+                  </Text>
+                )}
+              </FormControl>
+
+              <Stack spacing={10}>
+                <Stack
+                  direction={{ base: "column", sm: "row" }}
+                  align="start"
+                  justify="space-between"
+                >
+                  <Checkbox
+                    name="rememberMe"
+                    checked={formData.rememberMe}
+                    onChange={handleChange}
+                  >
+                    Remember me
+                  </Checkbox>
+                  <Text color="blue.400" cursor="pointer">
+                    Forgot password?
+                  </Text>
+                </Stack>
+                <Button
+                  type="submit"
+                  bg="blue.400"
+                  color="white"
+                  _hover={{ bg: "blue.500" }}
+                >
+                  Submit
+                </Button>
               </Stack>
-              <Button bg="blue.400" color="white" _hover={{ bg: "blue.500" }}>
-                Sign in
-              </Button>
             </Stack>
-          </Stack>
+          </form>
         </Box>
       </Stack>
     </Flex>
