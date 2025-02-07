@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/UI-POC/echarts/static/css/main.f1d3bebf.css",
+    "main.js": "/UI-POC/echarts/static/js/main.aa2ed42b.js",
+    "static/js/453.542ff7cb.chunk.js": "/UI-POC/echarts/static/js/453.542ff7cb.chunk.js",
+    "index.html": "/UI-POC/echarts/index.html",
+    "main.f1d3bebf.css.map": "/UI-POC/echarts/static/css/main.f1d3bebf.css.map",
+    "main.aa2ed42b.js.map": "/UI-POC/echarts/static/js/main.aa2ed42b.js.map",
+    "453.542ff7cb.chunk.js.map": "/UI-POC/echarts/static/js/453.542ff7cb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f1d3bebf.css",
+    "static/js/main.aa2ed42b.js"
+  ]
+}
