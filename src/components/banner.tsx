@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   Heading,
@@ -7,48 +7,48 @@ import {
   VStack,
   Image,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
-import BannerBg from "../assets/images/new-banner-img.png";
+} from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import BannerBg from '../assets/images/new-banner-img.png';
 
 const Banner: React.FC = () => {
-  const colorList: string[] = ["#E53E3E", "#000000"];
+  // const colorList: string[] = ["#E53E3E", "#000000"];
   return (
-    <Box position="relative" boxShadow="lg" overflow="hidden">
+    <Box position='relative' boxShadow='lg' overflow='hidden'>
       <Image
         src={BannerBg}
-        alt="Banner"
-        objectFit="cover"
-        width="100%"
-        height={{ base: "200px", md: "400px" }}
-        loading="lazy"
+        alt='Banner'
+        objectFit='cover'
+        width='100%'
+        height={{ base: '200px', md: '400px' }}
+        loading='lazy'
       />
 
       <VStack
-        position="absolute"
-        top="50%"
-        left="50%"
-        transform="translate(-50%, -50%)"
+        position='absolute'
+        top='50%'
+        left='50%'
+        transform='translate(-50%, -50%)'
         p={4}
-        textAlign="center"
-        color="white"
+        textAlign='center'
+        color='white'
         spacing={4}
-        maxW="80%"
+        maxW='80%'
       >
-        <Heading size="lg" fontSize={{ base: "2xl", md: "4xl" }}>
+        <Heading size='lg' fontSize={{ base: '2xl', md: '4xl' }}>
           Banner Heading
         </Heading>
-        <Text fontSize={{ base: "sm", md: "lg" }}>
+        <Text fontSize={{ base: 'sm', md: 'lg' }}>
           Discover amazing features and services.
         </Text>
         <Button
-          bg={useColorModeValue("#151f21", "gray.900")} // useColorModeValue(lightValue, darkValue) based on the current color mode
-          size="lg"
+          bg={useColorModeValue('#151f21', 'gray.900')} // useColorModeValue(lightValue, darkValue) based on the current color mode
+          size='lg'
           as={RouterLink}
-          to="/about"
+          to='/about'
           _hover={{
-            transform: "translateY(-2px)",
-            boxShadow: "lg",
+            transform: 'translateY(-2px)',
+            boxShadow: 'lg',
           }}
         >
           About Us
