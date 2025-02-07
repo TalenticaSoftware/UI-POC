@@ -11,9 +11,10 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  Spinner,
 } from "@chakra-ui/react";
 
-const SignInForm: React.FC = () => {
+const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
     email: "",
     contact: "",
@@ -24,13 +25,17 @@ const SignInForm: React.FC = () => {
     email: "",
     contact: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+    const fieldValue = type === "checkbox" ? checked : value;
 
     if (name === "email") {
       setErrors((prev) => ({
@@ -52,10 +57,10 @@ const SignInForm: React.FC = () => {
       }
     }
 
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: fieldValue }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let newErrors = { email: "", contact: "" };
 
@@ -67,7 +72,12 @@ const SignInForm: React.FC = () => {
     setErrors(newErrors);
     if (newErrors.email || newErrors.contact) return;
 
-    console.log("Form submitted", formData);
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    }, 2000);
   };
 
   return (
@@ -93,73 +103,80 @@ const SignInForm: React.FC = () => {
           boxShadow="lg"
           p={8}
         >
-          <form onSubmit={handleSubmit}>
-            <Stack spacing={4}>
-              <FormControl id="email" isInvalid={!!errors.email}>
-                <FormLabel>Email address</FormLabel>
-                <Input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.email && (
-                  <Text color="red.500" align={"left"} fontSize="sm">
-                    {errors.email}
-                  </Text>
-                )}
-              </FormControl>
-
-              <FormControl id="contact" isInvalid={!!errors.contact}>
-                <FormLabel>Contact</FormLabel>
-                <Input
-                  type="text"
-                  name="contact"
-                  value={formData.contact}
-                  onChange={handleChange}
-                  maxLength={10}
-                  required
-                />
-                {errors.contact && (
-                  <Text color="red.500" align={"left"} fontSize="sm">
-                    {errors.contact}
-                  </Text>
-                )}
-              </FormControl>
-
-              <Stack spacing={10}>
-                <Stack
-                  direction={{ base: "column", sm: "row" }}
-                  align="start"
-                  justify="space-between"
-                >
-                  <Checkbox
-                    name="rememberMe"
-                    checked={formData.rememberMe}
+          {isSubmitted ? (
+            <Text fontSize="lg" color="green.500" textAlign="center">
+              Form submitted successfully!
+            </Text>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <Stack spacing={4}>
+                <FormControl id="email" isInvalid={!!errors.email}>
+                  <FormLabel>Email address</FormLabel>
+                  <Input
+                    type="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
+                    required
+                  />
+                  {errors.email && (
+                    <Text color="red.500" align="left" fontSize="sm">
+                      {errors.email}
+                    </Text>
+                  )}
+                </FormControl>
+
+                <FormControl id="contact" isInvalid={!!errors.contact}>
+                  <FormLabel>Contact</FormLabel>
+                  <Input
+                    type="text"
+                    name="contact"
+                    value={formData.contact}
+                    onChange={handleChange}
+                    maxLength={10}
+                    required
+                  />
+                  {errors.contact && (
+                    <Text color="red.500" align="left" fontSize="sm">
+                      {errors.contact}
+                    </Text>
+                  )}
+                </FormControl>
+
+                <Stack spacing={10}>
+                  <Stack
+                    direction={{ base: "column", sm: "row" }}
+                    align="start"
+                    justify="space-between"
                   >
-                    Remember me
-                  </Checkbox>
-                  <Text color="blue.400" cursor="pointer">
-                    Forgot password?
-                  </Text>
+                    <Checkbox
+                      name="rememberMe"
+                      isChecked={formData.rememberMe}
+                      onChange={handleChange}
+                    >
+                      Remember me
+                    </Checkbox>
+                    <Text color="blue.400" cursor="pointer">
+                      Forgot password?
+                    </Text>
+                  </Stack>
+                  <Button
+                    type="submit"
+                    bg="blue.400"
+                    color="white"
+                    _hover={{ bg: "blue.500" }}
+                    isDisabled={isSubmitting}
+                  >
+                    {isSubmitting ? <Spinner size="sm" /> : "Submit"}
+                  </Button>
                 </Stack>
-                <Button
-                  type="submit"
-                  bg="blue.400"
-                  color="white"
-                  _hover={{ bg: "blue.500" }}
-                >
-                  Submit
-                </Button>
               </Stack>
-            </Stack>
-          </form>
+            </form>
+          )}
         </Box>
       </Stack>
     </Flex>
   );
 };
 
-export default SignInForm;
+export default ContactForm;

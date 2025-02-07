@@ -9,7 +9,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import BannerBg from "../assets/images/img.png";
+import BannerBg from "../assets/images/new-banner-img.png";
 
 const Banner: React.FC = () => {
   const colorList: string[] = ["#E53E3E", "#000000"];
@@ -42,7 +42,7 @@ const Banner: React.FC = () => {
           Discover amazing features and services.
         </Text>
         <Button
-          bg={useColorModeValue("#151f21", "gray.900")}
+          bg={useColorModeValue("#151f21", "gray.900")} // useColorModeValue(lightValue, darkValue) based on the current color mode
           size="lg"
           as={RouterLink}
           to="/about"
@@ -51,7 +51,7 @@ const Banner: React.FC = () => {
             boxShadow: "lg",
           }}
         >
-          Explore More
+          About Us
         </Button>
       </VStack>
     </Box>

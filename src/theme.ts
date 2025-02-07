@@ -6,6 +6,7 @@ const config: ThemeConfig = {
   initialColorMode: "light",
   useSystemColorMode: false,
 };
+
 const sizes = {
     ...baseTheme.space, 
     max: "max-content",
@@ -35,6 +36,14 @@ const sizes = {
 // Define custom theme colors, fonts, and component styles
 const theme = extendTheme({
   config,
+  styles: {
+    global: (props: any) => ({
+      body: {
+        bg: props.colorMode === "dark" ? "gray.800" : "white",
+        color: props.colorMode === "dark" ? "white" : "black",
+      },
+    }),
+  },
   colors: {
     brand: {
       50: "#e3f2f9",
