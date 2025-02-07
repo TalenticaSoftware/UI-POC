@@ -3,7 +3,7 @@ name: Deploy chakra-ui-poc
 on:
   push:
     branches:
-      - chakra-ui-poc
+      - feature/chakra-ui-poc
 
 jobs:
   deploy:
