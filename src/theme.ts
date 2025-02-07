@@ -1,4 +1,4 @@
-import { extendTheme, theme as baseTheme, ThemeConfig } from '@chakra-ui/react';
+import { extendTheme, ThemeConfig } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 
 // Define the color mode configuration

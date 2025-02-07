@@ -1,11 +1,11 @@
 import { Box, VStack } from '@chakra-ui/react';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Banner from '../components/banner.tsx';
 import HomeCardBox from '../components/pageComponent/homeCardBox.tsx';
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <Box as='main'>
