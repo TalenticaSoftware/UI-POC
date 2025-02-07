@@ -1,0 +1,33 @@
+name: Deploy echarts
+
+on:
+  push:
+    branches:
+      - echarts-setup-1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Navigate to echarts-poc directory
+        run: cd echarts-poc
+
+      - name: Install dependencies
+        working-directory: echarts-poc
+        run: npm install
+
+      - name: Build site
+        working-directory: echarts-poc
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: echarts-poc/build/
+          publish_branch: gh-pages
+          destination_dir: echarts
