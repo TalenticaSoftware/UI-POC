@@ -12,10 +12,9 @@ import Blog from './pages/blog.tsx';
 const App: React.FC = () => {
   return (
     <ChakraProvider theme={theme}>
-      <Router>
+      <Router basename='/UI-POC/chakra-ui'>
         <Box>
           <Header />
-
           <Flex direction='column' h='calc(100vh - 82px)' overflow={'auto'}>
             <Routes>
               <Route path='/' element={<Home />} />
