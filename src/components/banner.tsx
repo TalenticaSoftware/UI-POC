@@ -12,7 +12,16 @@ import { Link as RouterLink } from "react-router-dom";
 import BannerBg from "../assets/images/new-banner-img.png";
 
 const Banner: React.FC = () => {
-  const colorList: string[] = ["#E53E3E", "#000000"];
+  const animationStyles = {
+    bounceFadeIn: {
+      value: {
+        animationName: "bounce, fade-in",
+        animationDuration: "1s",
+        animationTimingFunction: "ease-in-out",
+        animationIterationCount: "infinite",
+      },
+    },
+  };
   return (
     <Box position="relative" boxShadow="lg" overflow="hidden">
       <Image
@@ -35,7 +44,11 @@ const Banner: React.FC = () => {
         spacing={4}
         maxW="80%"
       >
-        <Heading size="lg" fontSize={{ base: "2xl", md: "4xl" }}>
+        <Heading
+          size="lg"
+          fontSize={{ base: "2xl", md: "4xl" }}
+          sx={animationStyles.bounceFadeIn.value}
+        >
           Banner Heading
         </Heading>
         <Text fontSize={{ base: "sm", md: "lg" }}>

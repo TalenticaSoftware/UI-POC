@@ -41,8 +41,16 @@ const theme = extendTheme({
       body: {
         bg: props.colorMode === "dark" ? "gray.800" : "white",
         color: props.colorMode === "dark" ? "white" : "black",
+        lineHeight: "base",
+      },
+      a: {
+        color: "brand.500",
+        _hover: {
+          textDecoration: "underline",
+        },
       },
     }),
+    
   },
   colors: {
     brand: {
@@ -76,21 +84,6 @@ const theme = extendTheme({
   fonts: {
     heading: "Inter, sans-serif",
     body: "Inter, sans-serif",
-  },
-  styles: {
-    global: (props: any) => ({
-      body: {
-        color: mode("gray.800", "whiteAlpha.900")(props),
-        bg: mode("gray.50", "gray.900")(props),
-        lineHeight: "base",
-      },
-      a: {
-        color: "brand.500",
-        _hover: {
-          textDecoration: "underline",
-        },
-      },
-    }),
   },
   
   components: {
