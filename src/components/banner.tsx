@@ -12,16 +12,6 @@ import { Link as RouterLink } from "react-router-dom";
 import BannerBg from "../assets/images/new-banner-img.png";
 
 const Banner: React.FC = () => {
-  const animationStyles = {
-    bounceFadeIn: {
-      value: {
-        animationName: "bounce, fade-in",
-        animationDuration: "1s",
-        animationTimingFunction: "ease-in-out",
-        animationIterationCount: "infinite",
-      },
-    },
-  };
   return (
     <Box position="relative" boxShadow="lg" overflow="hidden">
       <Image
@@ -44,18 +34,14 @@ const Banner: React.FC = () => {
         spacing={4}
         maxW="80%"
       >
-        <Heading
-          size="lg"
-          fontSize={{ base: "2xl", md: "4xl" }}
-          sx={animationStyles.bounceFadeIn.value}
-        >
+        <Heading size="lg" fontSize={{ base: "2xl", md: "4xl" }}>
           Banner Heading
         </Heading>
         <Text fontSize={{ base: "sm", md: "lg" }}>
           Discover amazing features and services.
         </Text>
         <Button
-          bg={useColorModeValue("#151f21", "gray.900")} // useColorModeValue(lightValue, darkValue) based on the current color mode
+          bg={useColorModeValue("#151f21", "gray.900")}
           size="lg"
           as={RouterLink}
           to="/about"
