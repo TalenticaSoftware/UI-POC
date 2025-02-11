@@ -1,9 +1,10 @@
-// src/components/Header.tsx
 import { Box, Flex, Link, Image, Avatar, HStack } from "@chakra-ui/react";
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 const Header: React.FC = () => {
+  const location = useLocation();
+
   const flexProps = {
     as: "nav" as React.ElementType,
     align: "center",
@@ -13,6 +14,12 @@ const Header: React.FC = () => {
     px: 4,
     gap: 4,
   };
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   return (
     <Box as="header" bg="red.200" color="white" py={4}>
@@ -29,15 +36,25 @@ const Header: React.FC = () => {
         </HStack>
 
         <HStack spacing={8} flexGrow={1} justify="start">
-          <Link as={RouterLink} to="/" fontSize="lg" color="red.50">
-            Home
-          </Link>
-          <Link as={RouterLink} to="/about" fontSize="lg">
-            About
-          </Link>
-          <Link as={RouterLink} to="/contact" fontSize="lg">
-            Contact
-          </Link>
+          {navLinks.map(({ name, path }) => {
+            const isActive = location.pathname === path;
+            return (
+              <Link
+                key={path}
+                as={RouterLink}
+                to={path}
+                fontSize="lg"
+                color={isActive ? "white" : "red.50"}
+                fontWeight={isActive ? "bold" : "normal"}
+                textDecoration={isActive ? "underline" : "none"}
+                _hover={{ color: "white", textDecoration: "underline" }}
+                _activeLink={{ color: "yellow.300", fontWeight: "bold" }}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {name}
+              </Link>
+            );
+          })}
         </HStack>
 
         <Avatar

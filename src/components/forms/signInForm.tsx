@@ -144,22 +144,6 @@ const ContactForm: React.FC = () => {
                 </FormControl>
 
                 <Stack spacing={10}>
-                  <Stack
-                    direction={{ base: "column", sm: "row" }}
-                    align="start"
-                    justify="space-between"
-                  >
-                    <Checkbox
-                      name="rememberMe"
-                      isChecked={formData.rememberMe}
-                      onChange={handleChange}
-                    >
-                      Remember me
-                    </Checkbox>
-                    <Text color="blue.400" cursor="pointer">
-                      Forgot password?
-                    </Text>
-                  </Stack>
                   <Button
                     type="submit"
                     bg="blue.400"
