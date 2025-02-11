@@ -78,7 +78,7 @@ const theme = extendTheme({
       800: '#1a202c',
       900: '#171923',
     },
-    red: {
+    black: {
       200: 'black',
     },
   },

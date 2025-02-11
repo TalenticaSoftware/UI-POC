@@ -22,7 +22,7 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <Box as="header" bg="red.200" color="white" py={4}>
+    <Box as="header" bg="black.200" color="white" py={4}>
       <Flex {...flexProps}>
         <HStack spacing={4}>
           <Link as={RouterLink} to="/">
