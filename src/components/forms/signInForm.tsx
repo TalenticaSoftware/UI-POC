@@ -144,10 +144,8 @@ const ContactForm: React.FC = () => {
 
                 <Stack spacing={10}>
                   <Button
+                    variant={"solid"}
                     type="submit"
-                    bg="blue.400"
-                    color="white"
-                    _hover={{ bg: "blue.500" }}
                     isDisabled={isSubmitting}
                   >
                     {isSubmitting ? <Spinner size="sm" /> : "Submit"}

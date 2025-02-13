@@ -1,5 +1,6 @@
-import { extendTheme, ThemeConfig } from '@chakra-ui/react';
+import { background, border, extendTheme, ThemeConfig } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
+import { color } from 'framer-motion';
 
 // Define the color mode configuration
 const config: ThemeConfig = {
@@ -78,6 +79,9 @@ const theme = extendTheme({
       800: '#1a202c',
       900: '#171923',
     },
+    white: {
+      100: 'white',
+    },
     black: {
       200: 'black',
     },
@@ -112,11 +116,16 @@ const theme = extendTheme({
       },
       variants: {
         solid: {
-          bg: 'brand.500',
+          bg: 'black.200',
           color: 'white',
           _hover: {
-            bg: 'brand.600',
+            bg: 'white.100',
+            color: 'black.200',
+            border: '1px solid',
+            borderColor: 'black.200',
+
           },
+         
         },
         outline: {
           borderColor: 'brand.500',

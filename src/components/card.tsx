@@ -12,6 +12,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 interface BlogPostProps {
   id: number;
@@ -24,6 +25,8 @@ interface BlogPostProps {
   date: string;
   readTime: string;
 }
+
+const MotionCard = motion(Card);
 
 export default function BlogPostWithImage({
   id,
@@ -43,14 +46,18 @@ export default function BlogPostWithImage({
   };
 
   return (
-    <Card
+    <MotionCard
       as="button"
       onClick={handleClick}
       w={"full"}
       bg={useColorModeValue("white", "gray.900")}
-      boxShadow={"2xl"}
+      boxShadow={"lg"}
       rounded={"md"}
       overflow={"hidden"}
+      whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0,0,0,0.15)" }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Image src={imageUrl} alt={title} objectFit="cover" h="210px" w="full" />
 
@@ -89,6 +96,6 @@ export default function BlogPostWithImage({
           </Stack>
         </Stack>
       </CardFooter>
-    </Card>
+    </MotionCard>
   );
 }
