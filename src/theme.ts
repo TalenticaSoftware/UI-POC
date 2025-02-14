@@ -1,6 +1,6 @@
-import { background, border, extendTheme, ThemeConfig } from '@chakra-ui/react';
+import { extendTheme, ThemeConfig } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
-import { color } from 'framer-motion';
+
 
 
 const config: ThemeConfig = {
