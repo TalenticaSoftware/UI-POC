@@ -8,6 +8,7 @@ export const BarChart = () => {
 	const [showBackground, setShowBackground] = useState<boolean>(false);
 	const [alignWithXAxis, setAlignWithXAxis] = useState<boolean>(false);
 	const [differentBarColor, setDifferentBarColor] = useState<boolean>(true);
+	const [showVisualMap, setShowVisualMap] = useState<boolean>(false);
 
 	// Group cars by model year
 	const carCountByYear = data.reduce((acc: { [key: number]: number }, curr) => {
@@ -86,19 +87,22 @@ export const BarChart = () => {
 			nameGap: 50, // You can adjust the gap between the axis and title
 			padding: [10, 0, 0, 20], // Example padding
 		},
-		visualMap: {
-			orient: "horizontal",
-			left: "center",
-			bottom: "0px",
-			min: 0,
-			max: 10,
-			text: ["High Score", "Low Score"],
-			// Map the score column to color
-			dimension: 0,
-			inRange: {
-				color: ["#65B581", "#FFCE34", "#FD665F"],
-			},
-		},
+		visualMap: showVisualMap
+			? {
+					// Conditionally include the visualMap
+					orient: "horizontal",
+					left: "center",
+					bottom: "0px",
+					min: Math.min(...carCounts), // Set minimum to the smallest value in the carCounts array
+					max: Math.max(...carCounts), // Set maximum to the largest value in the carCounts array
+					text: ["High Count", "Low Count"], // Optional labels to indicate range
+					dimension: 1,
+					inRange: {
+						color: ["#65B581", "#FFCE34", "#FD665F"], // Gradient color scale from low to high
+					},
+					show: true, // Always show visualMap when enabled
+			  }
+			: null,
 		series: [
 			{
 				data: carCounts,
@@ -122,6 +126,10 @@ export const BarChart = () => {
 				},
 			},
 		],
+		grid: {
+			bottom: 100,
+			top: 100,
+		},
 	};
 
 	// Toggle background on button click
@@ -137,6 +145,10 @@ export const BarChart = () => {
 		setDifferentBarColor((prev: any) => !prev);
 	};
 
+	const toggleVisualMap = () => {
+		setShowVisualMap((prev: any) => !prev);
+	};
+
 	return (
 		<div>
 			<Card className="my-5 d-flex align-items-start" body>
@@ -150,16 +162,23 @@ export const BarChart = () => {
 				<Form.Check
 					checked={alignWithXAxis}
 					label="Align with X Axis"
-					className="d-inline-block mx-4"
+					className="d-inline-block ms-4"
 					id="xAxisCheckbox"
 					onClick={toggleXAxisAlignment}
 				/>
 				<Form.Check
 					checked={differentBarColor}
 					label="Different Bar Color"
-					className="d-inline-block"
+					className="d-inline-block mx-4"
 					id="barColorCheckbox"
 					onClick={toggleDifferentBarColor}
+				/>
+				<Form.Check
+					checked={showVisualMap}
+					label="Show Visual Map"
+					className="d-inline-block"
+					id="visualMapCheckbox"
+					onClick={toggleVisualMap} // Toggle the visual map visibility
 				/>
 			</Card>
 			<div className="chart-wrapper">
