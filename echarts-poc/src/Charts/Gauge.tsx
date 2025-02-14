@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ReactECharts from "echarts-for-react"; // Import ECharts for React
-import { Card, Form } from "react-bootstrap";
 
 export const Gauge = () => {
 	const [gaugeValue, setGaugeValue] = useState<number>(50); // Dynamic gauge value

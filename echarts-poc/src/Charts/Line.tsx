@@ -6,7 +6,7 @@ import { Card, Form } from "react-bootstrap";
 
 export const LineChart = () => {
 	const [smoothLine, setSmoothLine] = useState<boolean>(false);
-	const [stockSymbols, setStockSymbols] = useState<string[]>(
+	const [stockSymbols] = useState<string[]>(
 		stockData.map((stock) => stock.stock_symbol)
 	);
 	const [stockPrices, setStockPrices] = useState<number[]>(
