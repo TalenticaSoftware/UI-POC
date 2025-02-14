@@ -55,7 +55,7 @@ export const LineChart = () => {
           onClick={toggleSmoothLine}
         />
       </Card>
-      <div style={{ width: '600px' }}>
+      <div className="chart-wrapper">
         <ReactECharts option={option} />
       </div>
     </div>

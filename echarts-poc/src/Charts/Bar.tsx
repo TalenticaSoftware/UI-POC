@@ -86,6 +86,19 @@ export const BarChart = () => {
 			nameGap: 50, // You can adjust the gap between the axis and title
 			padding: [10, 0, 0, 20], // Example padding
 		},
+		visualMap: {
+			orient: "horizontal",
+			left: "center",
+			bottom: "0px",
+			min: 0,
+			max: 10,
+			text: ["High Score", "Low Score"],
+			// Map the score column to color
+			dimension: 0,
+			inRange: {
+				color: ["#65B581", "#FFCE34", "#FD665F"],
+			},
+		},
 		series: [
 			{
 				data: carCounts,
@@ -149,7 +162,7 @@ export const BarChart = () => {
 					onClick={toggleDifferentBarColor}
 				/>
 			</Card>
-			<div style={{ width: "600px" }}>
+			<div className="chart-wrapper">
 				<ReactECharts option={option} />
 			</div>
 		</div>

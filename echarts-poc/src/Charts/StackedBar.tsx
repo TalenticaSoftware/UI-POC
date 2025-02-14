@@ -137,7 +137,7 @@ const StackedBarChart = () => {
   };
 
   return (
-    <div style={{ width: '600px' }}>
+    <div className="chart-wrapper">
       <ReactECharts option={options} />
     </div>
   );

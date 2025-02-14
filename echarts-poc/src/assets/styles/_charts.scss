@@ -1,0 +1,11 @@
+.chart-wrapper{
+  height: 70vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+
+  .echarts-for-react{
+    height: 600px !important;
+  }
+
+}

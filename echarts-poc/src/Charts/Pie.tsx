@@ -120,7 +120,7 @@ export const PieChart = () => {
 					onClick={toggleChartType}
 				/>
 			</Card>
-			<div style={{ width: "600px" }}>
+			<div className="chart-wrapper">
 				<ReactECharts option={option} />
 			</div>
 		</div>

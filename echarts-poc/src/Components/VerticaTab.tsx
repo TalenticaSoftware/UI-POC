@@ -6,6 +6,7 @@ import WaterfallChart from "../Charts/Waterfall";
 import StackedBarChart from "../Charts/StackedBar";
 import { StackedLinesChart } from "../Charts/StackedLine";
 import PieChart from "../Charts/Pie";
+import { Gauge } from "../Charts/Gauge";
 
 // Array of tab items with corresponding component names
 const tabData = [
@@ -27,6 +28,7 @@ const tabData = [
 	},
 	{ eventKey: "tab5", label: "Waterfall", component: <WaterfallChart /> },
 	{ eventKey: "tab6", label: "Pie", component: <PieChart /> },
+	{ eventKey: "tab7", label: "Gauge", component: <Gauge /> },
 ];
 
 const VerticalTabs = () => {

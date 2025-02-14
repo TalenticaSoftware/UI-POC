@@ -108,7 +108,7 @@ const WaterfallChart: React.FC = () => {
 					onClick={toggleWaterfallData} // Toggle the waterfall data visibility
 				/>
 			</Card>
-			<div style={{ width: "600px" }}>
+			<div className="chart-wrapper">
 				<ReactECharts option={option} />
 			</div>
 		</div>
