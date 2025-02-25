@@ -11,21 +11,30 @@ import {
   Text,
   useColorModeValue,
   Spinner,
+  useToast,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
     email: "",
     contact: "",
-    rememberMe: false,
   });
 
   const [errors, setErrors] = useState({
     email: "",
     contact: "",
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -33,8 +42,7 @@ const ContactForm: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    const fieldValue = type === "checkbox" ? checked : value;
+    const { name, value } = e.target;
 
     if (name === "email") {
       setErrors((prev) => ({
@@ -56,7 +64,7 @@ const ContactForm: React.FC = () => {
       }
     }
 
-    setFormData((prev) => ({ ...prev, [name]: fieldValue }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -75,7 +83,15 @@ const ContactForm: React.FC = () => {
 
     setTimeout(() => {
       setIsSubmitting(false);
-      setIsSubmitted(true);
+      onOpen();
+      toast({
+        title: "Form Submitted",
+        description: "Your details have been successfully submitted!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
     }, 2000);
   };
 
@@ -102,60 +118,65 @@ const ContactForm: React.FC = () => {
           boxShadow="lg"
           p={8}
         >
-          {isSubmitted ? (
-            <Text fontSize="lg" color="green.500" textAlign="center">
-              Form submitted successfully!
-            </Text>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <Stack spacing={4}>
-                <FormControl id="email" isInvalid={!!errors.email}>
-                  <FormLabel>Email address</FormLabel>
-                  <Input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                  {errors.email && (
-                    <Text color="red.500" align="left" fontSize="sm">
-                      {errors.email}
-                    </Text>
-                  )}
-                </FormControl>
+          <form onSubmit={handleSubmit}>
+            <Stack spacing={4}>
+              <FormControl id="email" isInvalid={!!errors.email}>
+                <FormLabel>Email address</FormLabel>
+                <Input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                {errors.email && (
+                  <Text color="red.500" fontSize="sm">
+                    {errors.email}
+                  </Text>
+                )}
+              </FormControl>
 
-                <FormControl id="contact" isInvalid={!!errors.contact}>
-                  <FormLabel>Contact</FormLabel>
-                  <Input
-                    type="text"
-                    name="contact"
-                    value={formData.contact}
-                    onChange={handleChange}
-                    maxLength={10}
-                    required
-                  />
-                  {errors.contact && (
-                    <Text color="red.500" align="left" fontSize="sm">
-                      {errors.contact}
-                    </Text>
-                  )}
-                </FormControl>
+              <FormControl id="contact" isInvalid={!!errors.contact}>
+                <FormLabel>Contact</FormLabel>
+                <Input
+                  type="text"
+                  name="contact"
+                  value={formData.contact}
+                  onChange={handleChange}
+                  maxLength={10}
+                  required
+                />
+                {errors.contact && (
+                  <Text color="red.500" fontSize="sm">
+                    {errors.contact}
+                  </Text>
+                )}
+              </FormControl>
 
-                <Stack spacing={10}>
-                  <Button
-                    variant={"solid"}
-                    type="submit"
-                    isDisabled={isSubmitting}
-                  >
-                    {isSubmitting ? <Spinner size="sm" /> : "Submit"}
-                  </Button>
-                </Stack>
+              <Stack spacing={10}>
+                <Button variant="solid" type="submit" isDisabled={isSubmitting}>
+                  {isSubmitting ? <Spinner size="sm" /> : "Submit"}
+                </Button>
               </Stack>
-            </form>
-          )}
+            </Stack>
+          </form>
         </Box>
       </Stack>
+
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Success</ModalHeader>
+          <ModalBody>
+            <Text>Your form has been successfully submitted!</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Flex>
   );
 };
