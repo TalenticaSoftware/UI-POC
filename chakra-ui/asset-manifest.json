@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/UI-POC/chakra-ui/static/js/main.f7890889.js",
+    "main.js": "/UI-POC/chakra-ui/static/js/main.8f1002e5.js",
     "static/media/new-banner-img.png": "/UI-POC/chakra-ui/static/media/new-banner-img.7e5ecee1e6b1bcc729a0.png",
     "static/media/travel.jpeg": "/UI-POC/chakra-ui/static/media/travel.6af72fc6839ad53830b7.jpeg",
     "index.html": "/UI-POC/chakra-ui/index.html",
-    "main.f7890889.js.map": "/UI-POC/chakra-ui/static/js/main.f7890889.js.map"
+    "main.8f1002e5.js.map": "/UI-POC/chakra-ui/static/js/main.8f1002e5.js.map"
   },
   "entrypoints": [
-    "static/js/main.f7890889.js"
+    "static/js/main.8f1002e5.js"
   ]
 }
