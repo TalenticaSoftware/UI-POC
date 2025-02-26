@@ -1,19 +1,10 @@
 import { Box, Flex, Link, Image, Avatar, HStack } from "@chakra-ui/react";
 import React from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
+import { headerStyles } from "./headerStyle.ts";
 
 const Header: React.FC = () => {
   const location = useLocation();
-
-  const flexProps = {
-    as: "nav" as React.ElementType,
-    align: "center",
-    justify: "space-between",
-    maxW: "container.xl",
-    mx: "auto",
-    px: 4,
-    gap: 4,
-  };
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -22,15 +13,14 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <Box as="header" bg="black.200" color="white" py={4}>
-      <Flex {...flexProps}>
+    <Box {...headerStyles.header}>
+      <Flex {...headerStyles.flexContainer}>
         <HStack spacing={4}>
           <Link as={RouterLink} to="/">
             <Image
               src="https://www.talentica.com/wp-content/uploads/2021/09/Talentica-white-Logo.svg"
               alt="Brand Logo"
-              height="50px"
-              objectFit="contain"
+              sx={headerStyles.logoImage}
             />
           </Link>
         </HStack>
@@ -43,11 +33,7 @@ const Header: React.FC = () => {
                 key={path}
                 as={RouterLink}
                 to={path}
-                fontSize="lg"
-                color={isActive ? "white" : "red.50"}
-                fontWeight={isActive ? "bold" : "normal"}
-                _hover={{ textDecoration: "none" }}
-                _activeLink={{ color: "yellow.300", fontWeight: "bold" }}
+                sx={headerStyles.navLink(isActive)}
                 aria-current={isActive ? "page" : undefined}
               >
                 {name}
@@ -59,8 +45,7 @@ const Header: React.FC = () => {
         <Avatar
           name="User Name"
           src="https://bit.ly/dan-abramov"
-          size="sm"
-          cursor="pointer"
+          sx={headerStyles.avatar}
         />
       </Flex>
     </Box>
