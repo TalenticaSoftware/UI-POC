@@ -46,8 +46,7 @@ const Header: React.FC = () => {
                 fontSize="lg"
                 color={isActive ? "white" : "red.50"}
                 fontWeight={isActive ? "bold" : "normal"}
-                textDecoration={isActive ? "underline" : "none"}
-                _hover={{ color: "white", textDecoration: "underline" }}
+                _hover={{ textDecoration: "none" }}
                 _activeLink={{ color: "yellow.300", fontWeight: "bold" }}
                 aria-current={isActive ? "page" : undefined}
               >

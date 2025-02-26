@@ -83,6 +83,7 @@ const ContactForm: React.FC = () => {
 
     setTimeout(() => {
       setIsSubmitting(false);
+      setFormData({ email: "", contact: "" });
       onOpen();
       toast({
         title: "Form Submitted",
