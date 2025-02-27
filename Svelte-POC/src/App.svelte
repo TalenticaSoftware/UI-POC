@@ -6,8 +6,8 @@
 
     let todos = null;
     let error = null;
-    let isLoading = false
-    let isAdding = false
+    let isLoading = false;
+    let isAdding = false;
     let todoListVar;
     let disabledItems = [];
     let showlist = true;
@@ -58,7 +58,8 @@
       }).then(async(res) => {
         if(res.ok){
           const todo = await res.json();
-          todos = [...todos, {...todo, id:uuid()}]
+          const uid = uuid()
+          todos = [...todos, {...todo, id:uid, userId:1}]
           todoListVar.clearInput()
         }
       }).catch((error) => alert(error))
@@ -162,10 +163,6 @@
 </main>
 
 <style>
-  /* h1 tags present in this only will be applied with color red as svelte will add a class to it */
-  h1{
-    color: red;
-  }
   .flexContentCenter{
     display: flex;
     justify-content: center;

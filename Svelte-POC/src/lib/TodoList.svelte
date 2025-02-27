@@ -125,7 +125,7 @@
                                 {@const {id , title, completed} = todo}
                                 <li animate:flip={{ duration: 300 }}>
                                     <slot {todo}>
-                                        <div class:completed in:receive|local={{ key: id }} out:send|local={{ key: id }}>
+                                        <div class:completed in:recieve|local={{ key: id }} out:send|local={{ key: id }}>
                                             <label class='li-label'>
                                                 <input 
                                                 type="checkbox"  
@@ -163,7 +163,7 @@
         <input type="text" bind:value={inputText} bind:this={input} disabled={disableAdding || !todos} placeholder="New Todo"> 
          <!-- 2nd method to bind with callback is old method will use 1st method as sevlte will do things for us -->
          <!-- <input type="text" on:input={(e) => {inputText = e.currentTarget.value}}> -->
-        <Button type='submit' style="add-todo-button" disabled={!inputText || disableAdding || !todos}>Add</Button>
+        <Button type='submit' disabled={!inputText || disableAdding || !todos}>Add</Button>
     </form>
 </main>
 
@@ -179,22 +179,22 @@
 }
 .no-items-text {
       margin: 0;
-      padding: 15px;
+      padding: 1rem;
       text-align: center;
 }
 ul {
     margin: 0;
-    padding: 10px;
+    padding: 0.625rem;
     list-style: none;
 }
 li > div{
-    margin-bottom: 5px;
+    margin-bottom: 0.375rem;
     display: flex;
     align-items: center;
     background-color: #222;
-    border-radius: 5px;
+    border-radius: 0.375rem;
     color: #fff;
-    padding: 10px;
+    padding: 0.625rem;
     position: relative;
     &.completed > .li-label {
         opacity: 0.5;
@@ -203,7 +203,7 @@ li > div{
 }
 .li-label{
     cursor: pointer;
-    font-size: 18px;
+    font-size: 1.125rem;
     display: flex;
     align-items: baseline;
     padding-right: 50px;
@@ -214,9 +214,9 @@ li > div{
     }
 }
 .remove-todo-button {
-    padding: 5px;
+    padding: 0.375rem;
     position: absolute;
-    right: 10px;
+    right: 0.625rem;
     cursor: pointer;
     background-color: rgb(248, 176, 176);
     &:disabled{
@@ -226,28 +226,21 @@ li > div{
 }
 
 .add-todo-form {
-  padding: 15px;
+  padding: 1rem;
   background-color: #4b4b4b;
   display: flex;
   flex-wrap: wrap;
   border: 1px solid #4b4b4b;
   margin-top: 0.5rem;
 }
-.add-todo-button{
-    padding: 5px;
-    position: absolute;
-    right: 10px;
-    cursor: pointer;
-    background-color: aquamarine;
-}
 input {
     flex: 1;
     background-color: #222;
     border: 1px solid #4b4b4b;
-    padding: 10px;
+    padding: 0.625rem;
     color: #fff;
-    border-radius: 5px;
-    margin-right: 10px;
+    border-radius: 0.375rem;
+    margin-right: 0.625rem;
 }
 .list-wrapper{
     display: flex;

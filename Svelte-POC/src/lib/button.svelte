@@ -60,7 +60,7 @@ on:click
         } */
     }
     .left-content{
-        margin-right: 10px;
+        margin-right: 0.625rem;
     }
     
 </style>
