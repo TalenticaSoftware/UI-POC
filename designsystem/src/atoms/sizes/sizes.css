@@ -1,6 +1,0 @@
-@layer components {
-   .size-button{
-       @apply border-theme-neutral70 text-theme-neutral hover:text-theme-white hover:bg-theme-primary  active:text-theme-white  active:bg-theme-primary !important h-38;
-   }
-}
-  
