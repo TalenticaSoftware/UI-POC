@@ -1,10 +1,11 @@
-import type { FunctionComponent, ActionFunctionArgs } from "react";
-import { json } from "@remix-run/node";
-import { Form, useLoaderData, useFetcher } from "@remix-run/react";
+import type { ActionFunctionArgs, FunctionComponent } from "react";
+import { Form, useFetcher, useLoaderData } from "@remix-run/react";
+import { getContact, updateContact } from "../data";
+
 import type { ContactRecord } from "../data";
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import invariant from "tiny-invariant";
-import { getContact, updateContact } from "../data";
+import { json } from "@remix-run/node";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.contactId, "Missing contactId param");
@@ -44,7 +45,7 @@ export default function Contact() {
           ) : (
             <i>No Name</i>
           )}{" "}
-          <Favorite contact={contact} />
+          {/* <Favorite contact={contact} /> */}
         </h1>
 
         {contact.twitter ? (

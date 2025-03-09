@@ -1,3 +1,4 @@
+import { ContactMutation, createEmptyContact, getContacts } from "./data";
 import {
   Form,
   Links,
@@ -11,7 +12,6 @@ import {
   useSubmit,
 } from "@remix-run/react";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { createEmptyContact, getContacts } from "./data";
 import { json, redirect } from "@remix-run/node";
 
 import appStylesHref from "./app.css?url";
@@ -100,7 +100,7 @@ export default function App() {
           <nav>
             {contacts.length ? (
               <ul>
-                {contacts.map((contact) => (
+                {contacts.map((contact: ContactMutation) => (
                   <li key={contact.id}>
                     <NavLink
                       className={({ isActive, isPending }) =>
