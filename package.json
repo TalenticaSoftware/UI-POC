@@ -9,9 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "tailwindcss -i ./index.css -o ./public/css/style.css --watch",
-    "build:css": "tailwindcss -i ./index.css -o ./public/css/style.css",
-    "build": "npm run build:css && cp node_modules/htmx.org/dist/htmx.min.js public/js/ && cp index.html public/",
-    "deploy": "npm run build && NODE_ENV=production node index.js"
+    "build:css": "tailwindcss -i ./index.css -o ./public/css/style.css"
   },
   "keywords": [],
   "author": "",
