@@ -13,11 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Navigate to Svelte-POC directory
+        run: cd Svelte-POC
 
       - name: Install dependencies
+        working-directory: Svelte-POC
         run: npm install
 
       - name: Build site
+        working-directory: Svelte-POC
         run: npm run build
 
       - name: Deploy to GitHub Pages
@@ -26,4 +30,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: Svelte-POC/build/
           publish_branch: gh-pages
-          destination_dir: svelte-master
+          destination_dir: echarts
