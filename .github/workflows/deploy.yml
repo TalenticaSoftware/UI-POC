@@ -30,4 +30,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: Svelte-POC/dist/
           publish_branch: gh-pages
-          destination_dir: echarts
+          destination_dir: svelte-master
