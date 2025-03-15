@@ -1,4 +1,4 @@
-name: Deploy svelte-master
+name: Deploy Svelte-POC to GitHub Pages
 
 on:
   push:
@@ -10,24 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Navigate to Svelte-POC directory
-        run: cd Svelte-POC
-
       - name: Install dependencies
-        working-directory: Svelte-POC
+        working-directory: Svelte-POC 
         run: npm install
 
-      - name: Build site
-        working-directory: Svelte-POC
+      - name: Build project
+        working-directory: Svelte-POC  
         run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: Svelte-POC/dist/
+          publish_dir: Svelte-POC/dist/ 
           publish_branch: gh-pages
-          destination_dir: svelte-master
+          destination_dir: svelte-master 
