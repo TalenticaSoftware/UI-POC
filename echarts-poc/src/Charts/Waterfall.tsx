@@ -102,7 +102,7 @@ const WaterfallChart: React.FC = () => {
 				/>
 				<Form.Check
 					checked={showWaterfallData}
-					label="Show Waterfall Data"
+					label="Show value in tooltip"
 					className="d-inline-block ms-3"
 					id="showWaterfallData"
 					onClick={toggleWaterfallData} // Toggle the waterfall data visibility

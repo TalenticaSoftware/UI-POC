@@ -87,22 +87,21 @@ export const BarChart = () => {
 			nameGap: 50, // You can adjust the gap between the axis and title
 			padding: [10, 0, 0, 20], // Example padding
 		},
-		visualMap: showVisualMap
-			? {
-					// Conditionally include the visualMap
-					orient: "horizontal",
-					left: "center",
-					bottom: "0px",
-					min: Math.min(...carCounts), // Set minimum to the smallest value in the carCounts array
-					max: Math.max(...carCounts), // Set maximum to the largest value in the carCounts array
-					text: ["High Count", "Low Count"], // Optional labels to indicate range
-					dimension: 1,
-					inRange: {
-						color: ["#65B581", "#FFCE34", "#FD665F"], // Gradient color scale from low to high
-					},
-					show: true, // Always show visualMap when enabled
-			  }
-			: null,
+		...(showVisualMap === true && {
+			visualMap: {
+				orient: "horizontal",
+				left: "center",
+				bottom: "0px",
+				min: Math.min(...carCounts),
+				max: Math.max(...carCounts),
+				text: ["High Count", "Low Count"],
+				dimension: 1,
+				// show: true, // Always show visualMap when enabled
+				inRange: {
+					color: ["#65B581", "#FFCE34", "#FD665F"],
+				},
+			},
+		}),
 		series: [
 			{
 				data: carCounts,
@@ -182,7 +181,10 @@ export const BarChart = () => {
 				/>
 			</Card>
 			<div className="chart-wrapper">
-				<ReactECharts option={option} />
+				<ReactECharts
+					key={showVisualMap ? "withVisualMap" : "withoutVisualMap"}
+					option={option}
+				/>
 			</div>
 		</div>
 	);
