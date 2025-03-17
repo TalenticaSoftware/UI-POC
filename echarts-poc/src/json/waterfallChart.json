@@ -1,0 +1,452 @@
+[
+	{
+		"transaction_id": 1,
+		"revenue": 318511.69,
+		"cost": 293334.85,
+		"profit": 285176.84,
+		"date": "6/13/2021",
+		"product_category": "electronics",
+		"customer_age": 29
+	},
+	{
+		"transaction_id": 2,
+		"revenue": 881182.24,
+		"cost": 159089.25,
+		"profit": 722092.99,
+		"date": "4/27/2021",
+		"product_category": "food",
+		"customer_age": 43
+	},
+	{
+		"transaction_id": 3,
+		"revenue": 959021.82,
+		"cost": 264554.26,
+		"profit": -694467.56,
+		"date": "9/13/2021",
+		"product_category": "electronics",
+		"customer_age": 27
+	},
+	{
+		"transaction_id": 4,
+		"revenue": 271513.82,
+		"cost": 457606.16,
+		"profit": -186092.34,
+		"date": "7/20/2021",
+		"product_category": "clothing",
+		"customer_age": 24
+	},
+	{
+		"transaction_id": 5,
+		"revenue": 775005.18,
+		"cost": 58291.96,
+		"profit": 716713.22,
+		"date": "8/21/2021",
+		"product_category": "food",
+		"customer_age": 39
+	},
+	{
+		"transaction_id": 6,
+		"revenue": 598235.42,
+		"cost": 14104.86,
+		"profit": 584130.56,
+		"date": "6/20/2021",
+		"product_category": "electronics",
+		"customer_age": 63
+	},
+	{
+		"transaction_id": 7,
+		"revenue": 93493.62,
+		"cost": 158569.59,
+		"profit": -65075.97,
+		"date": "8/3/2021",
+		"product_category": "electronics",
+		"customer_age": 77
+	},
+	{
+		"transaction_id": 8,
+		"revenue": 100213.12,
+		"cost": 489938.58,
+		"profit": -389725.46,
+		"date": "8/1/2021",
+		"product_category": "clothing",
+		"customer_age": 58
+	},
+	{
+		"transaction_id": 9,
+		"revenue": 794178.08,
+		"cost": 385228.85,
+		"profit": 408949.23,
+		"date": "1/30/2021",
+		"product_category": "electronics",
+		"customer_age": 25
+	},
+	{
+		"transaction_id": 10,
+		"revenue": 800652.09,
+		"cost": 395215.95,
+		"profit": 405436.14,
+		"date": "9/16/2021",
+		"product_category": "food",
+		"customer_age": 45
+	},
+	{
+		"transaction_id": 11,
+		"revenue": 827923.7,
+		"cost": 443106.5,
+		"profit": 384817.2,
+		"date": "10/18/2021",
+		"product_category": "clothing",
+		"customer_age": 55
+	},
+	{
+		"transaction_id": 12,
+		"revenue": 68999.6,
+		"cost": 354091.96,
+		"profit": -285092.36,
+		"date": "8/10/2021",
+		"product_category": "food",
+		"customer_age": 24
+	},
+	{
+		"transaction_id": 13,
+		"revenue": 424657.32,
+		"cost": 295097.77,
+		"profit": 129559.55,
+		"date": "12/11/2021",
+		"product_category": "food",
+		"customer_age": 81
+	},
+	{
+		"transaction_id": 14,
+		"revenue": 820013.76,
+		"cost": 331987.13,
+		"profit": 488026.63,
+		"date": "3/31/2021",
+		"product_category": "food",
+		"customer_age": 31
+	},
+	{
+		"transaction_id": 15,
+		"revenue": 796986.41,
+		"cost": 374597.19,
+		"profit": 422389.22,
+		"date": "12/19/2021",
+		"product_category": "food",
+		"customer_age": 82
+	},
+	{
+		"transaction_id": 16,
+		"revenue": 547793.16,
+		"cost": 107889.78,
+		"profit": 439903.38,
+		"date": "8/26/2021",
+		"product_category": "clothing",
+		"customer_age": 76
+	},
+	{
+		"transaction_id": 17,
+		"revenue": 253313.14,
+		"cost": 138317.3,
+		"profit": 114995.84,
+		"date": "8/22/2021",
+		"product_category": "clothing",
+		"customer_age": 29
+	},
+	{
+		"transaction_id": 18,
+		"revenue": 729505.36,
+		"cost": 267092.47,
+		"profit": 462412.89,
+		"date": "11/9/2021",
+		"product_category": "clothing",
+		"customer_age": 44
+	},
+	{
+		"transaction_id": 19,
+		"revenue": 849274.45,
+		"cost": 211444.36,
+		"profit": 637830.09,
+		"date": "9/15/2021",
+		"product_category": "food",
+		"customer_age": 68
+	},
+	{
+		"transaction_id": 20,
+		"revenue": 543899.5,
+		"cost": 421597.59,
+		"profit": 122301.91,
+		"date": "2/3/2021",
+		"product_category": "clothing",
+		"customer_age": 74
+	},
+	{
+		"transaction_id": 21,
+		"revenue": 818193.96,
+		"cost": 461007.21,
+		"profit": 357186.75,
+		"date": "1/23/2021",
+		"product_category": "electronics",
+		"customer_age": 52
+	},
+	{
+		"transaction_id": 22,
+		"revenue": 169773.16,
+		"cost": 71595.87,
+		"profit": 98177.29,
+		"date": "3/11/2021",
+		"product_category": "clothing",
+		"customer_age": 21
+	},
+	{
+		"transaction_id": 23,
+		"revenue": 401642.56,
+		"cost": 217978.82,
+		"profit": 183663.74,
+		"date": "6/19/2021",
+		"product_category": "clothing",
+		"customer_age": 26
+	},
+	{
+		"transaction_id": 24,
+		"revenue": 287553.93,
+		"cost": 481715.05,
+		"profit": -194161.12,
+		"date": "2/25/2021",
+		"product_category": "food",
+		"customer_age": 72
+	},
+	{
+		"transaction_id": 25,
+		"revenue": 73634.71,
+		"cost": 239668.57,
+		"profit": -166033.86,
+		"date": "7/4/2021",
+		"product_category": "clothing",
+		"customer_age": 22
+	},
+	{
+		"transaction_id": 26,
+		"revenue": 580849.1,
+		"cost": 428700.31,
+		"profit": 152148.79,
+		"date": "11/8/2021",
+		"product_category": "food",
+		"customer_age": 47
+	},
+	{
+		"transaction_id": 27,
+		"revenue": 53008.75,
+		"cost": 206525.38,
+		"profit": -153516.63,
+		"date": "6/22/2021",
+		"product_category": "food",
+		"customer_age": 85
+	},
+	{
+		"transaction_id": 28,
+		"revenue": 465345.88,
+		"cost": 448895.84,
+		"profit": 16450.04,
+		"date": "6/5/2021",
+		"product_category": "electronics",
+		"customer_age": 45
+	},
+	{
+		"transaction_id": 29,
+		"revenue": 806228.67,
+		"cost": 13723.45,
+		"profit": 792505.22,
+		"date": "2/20/2021",
+		"product_category": "food",
+		"customer_age": 21
+	},
+	{
+		"transaction_id": 30,
+		"revenue": 508764.86,
+		"cost": 426360.44,
+		"profit": 82404.42,
+		"date": "4/10/2021",
+		"product_category": "food",
+		"customer_age": 36
+	},
+	{
+		"transaction_id": 31,
+		"revenue": 43849.76,
+		"cost": 425312.52,
+		"profit": -381462.76,
+		"date": "7/2/2021",
+		"product_category": "food",
+		"customer_age": 31
+	},
+	{
+		"transaction_id": 32,
+		"revenue": 412976.07,
+		"cost": 333479.52,
+		"profit": 79496.55,
+		"date": "2/22/2021",
+		"product_category": "clothing",
+		"customer_age": 25
+	},
+	{
+		"transaction_id": 33,
+		"revenue": 940836.73,
+		"cost": 370049.92,
+		"profit": 570786.81,
+		"date": "5/10/2021",
+		"product_category": "electronics",
+		"customer_age": 27
+	},
+	{
+		"transaction_id": 34,
+		"revenue": 434686.02,
+		"cost": 116641.44,
+		"profit": 318044.58,
+		"date": "8/9/2021",
+		"product_category": "electronics",
+		"customer_age": 19
+	},
+	{
+		"transaction_id": 35,
+		"revenue": 723023.45,
+		"cost": 175147.55,
+		"profit": 547875.9,
+		"date": "5/10/2021",
+		"product_category": "electronics",
+		"customer_age": 62
+	},
+	{
+		"transaction_id": 36,
+		"revenue": 243487.36,
+		"cost": 422305.48,
+		"profit": -178818.12,
+		"date": "1/25/2021",
+		"product_category": "clothing",
+		"customer_age": 20
+	},
+	{
+		"transaction_id": 37,
+		"revenue": 86924.87,
+		"cost": 446179.43,
+		"profit": -359254.56,
+		"date": "8/23/2021",
+		"product_category": "food",
+		"customer_age": 84
+	},
+	{
+		"transaction_id": 38,
+		"revenue": 511559.8,
+		"cost": 261963.22,
+		"profit": 249596.58,
+		"date": "10/11/2021",
+		"product_category": "electronics",
+		"customer_age": 63
+	},
+	{
+		"transaction_id": 39,
+		"revenue": 486257.29,
+		"cost": 281787.73,
+		"profit": 204469.56,
+		"date": "3/29/2021",
+		"product_category": "clothing",
+		"customer_age": 84
+	},
+	{
+		"transaction_id": 40,
+		"revenue": 990853.48,
+		"cost": 58100.04,
+		"profit": 932753.44,
+		"date": "8/6/2021",
+		"product_category": "food",
+		"customer_age": 67
+	},
+	{
+		"transaction_id": 41,
+		"revenue": 727676.83,
+		"cost": 460985.55,
+		"profit": 266691.28,
+		"date": "2/4/2021",
+		"product_category": "clothing",
+		"customer_age": 80
+	},
+	{
+		"transaction_id": 42,
+		"revenue": 964722.78,
+		"cost": 164728.67,
+		"profit": 799994.11,
+		"date": "9/28/2021",
+		"product_category": "food",
+		"customer_age": 55
+	},
+	{
+		"transaction_id": 43,
+		"revenue": 853144.31,
+		"cost": 415343.89,
+		"profit": 437800.42,
+		"date": "1/9/2021",
+		"product_category": "electronics",
+		"customer_age": 55
+	},
+	{
+		"transaction_id": 44,
+		"revenue": 329281.88,
+		"cost": 217524.21,
+		"profit": 111757.67,
+		"date": "9/14/2021",
+		"product_category": "clothing",
+		"customer_age": 44
+	},
+	{
+		"transaction_id": 45,
+		"revenue": 824516.4,
+		"cost": 278409.23,
+		"profit": 546107.17,
+		"date": "9/19/2021",
+		"product_category": "food",
+		"customer_age": 62
+	},
+	{
+		"transaction_id": 46,
+		"revenue": 275209.77,
+		"cost": 48701.59,
+		"profit": 226508.18,
+		"date": "7/21/2021",
+		"product_category": "food",
+		"customer_age": 78
+	},
+	{
+		"transaction_id": 47,
+		"revenue": 344804.38,
+		"cost": 222069.15,
+		"profit": 122735.23,
+		"date": "5/24/2021",
+		"product_category": "food",
+		"customer_age": 29
+	},
+	{
+		"transaction_id": 48,
+		"revenue": 438375.18,
+		"cost": 440252.76,
+		"profit": -1877.58,
+		"date": "2/2/2021",
+		"product_category": "electronics",
+		"customer_age": 25
+	},
+	{
+		"transaction_id": 49,
+		"revenue": 134257.55,
+		"cost": 445540.59,
+		"profit": -311283.04,
+		"date": "4/15/2021",
+		"product_category": "clothing",
+		"customer_age": 18
+	},
+	{
+		"transaction_id": 50,
+		"revenue": 203588.59,
+		"cost": 283345.46,
+		"profit": -79756.87,
+		"date": "8/18/2021",
+		"product_category": "clothing",
+		"customer_age": 27
+	}
+]
