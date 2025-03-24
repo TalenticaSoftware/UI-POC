@@ -34,7 +34,6 @@
     class="new-todo"
     placeholder="What needs to be done?"
     type="text"
-    autofocus
     />
   </form>
   
