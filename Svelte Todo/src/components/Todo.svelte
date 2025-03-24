@@ -76,14 +76,12 @@
     </div>
   
     {#if editing}
-    <!-- svelte-ignore a11y_autofocus -->
     <input
       on:keydown={(event) => handleEdit(event, todo.id)}
       on:blur={(event) => handleBlur(event, todo.id)}
       class="edit"
       type="text"
       value={todo.text}
-      autofocus={true}
     />
   {/if}
   </li>
