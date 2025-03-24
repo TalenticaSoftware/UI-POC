@@ -93,16 +93,6 @@ app.post("/todos", async (req, res) => {
   const { todo, selectedFilter = "All" } = req.body;
 
   try {
-    const existingTodo = await Todo.findOne({
-      name: todo.trim().toLowerCase(),
-    });
-
-    if (existingTodo) {
-      return res
-        .status(400)
-        .send("This todo already exists. Please enter a new one.");
-    }
-
     const newTodo = new Todo({ name: todo });
     await newTodo.save();
 
@@ -123,6 +113,11 @@ app.post("/todos", async (req, res) => {
       });
     }, 2000);
   } catch (error) {
+    if (error.code === 11000) {
+      return res
+        .status(400)
+        .send("This todo already exists. Please enter a new one.");
+    }
     console.error(error);
     res.status(500).send("Internal Server Error");
   }

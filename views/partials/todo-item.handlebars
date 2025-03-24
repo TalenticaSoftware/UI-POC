@@ -1,39 +1,91 @@
 <div class="flex items-center mb-4 justify-between" id="todo-{{this._id}}">
   <div class="flex items-center">
-    <input
-      name="completed"
-      hx-target="body"
-      hx-swap="innerHTML transition:true"
-      hx-patch="/todo/{{this._id}}"
-      type="checkbox"
-      class="h-6 w-6 mr-4"
-      {{#if this.completed}} checked {{/if}}
-    />
+    <div class="relative w-6 h-6 mr-4">
+      <input
+        name="completed"
+        hx-target="body"
+        hx-swap="innerHTML transition:true"
+        hx-patch="/todo/{{this._id}}"
+        type="checkbox"
+        class="h-6 w-6 checkbox-input appearance-none border-2 border-gray-300 rounded checked:bg-blue-500 checked:border-blue-500"
+        {{#if this.completed}} checked {{/if}}
+        onclick="this.classList.add('invisible'); this.nextElementSibling.classList.remove('hidden')"
+      />
+      <img 
+        src="assets/bars.svg" 
+        class="spinner hidden h-4 w-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" 
+        alt="Loading..."
+      />
+    </div>
     <div class="{{#if this.completed}}line-through{{/if}}">{{this.name}}</div>
   </div>
-  <div class="flex gap-4">
-    <!-- Edit Button -->
-    <img
-      hx-get="/todos/{{this._id}}/edit?filter={{this.selectedFilter}}{{#unless this.selectedFilter}}{{@root.selectedFilter}}{{/unless}}"
-      hx-target="#todo-{{this._id}}"
-      hx-swap="outerHTML transition:true"
-      src="assets/edit.svg"
-      alt="Edit"
-      class="h-6 w-6 cursor-pointer"
-      title="Edit Todo"
-    />
+  <div class="flex gap-4 items-center relative">
+    <!-- Edit Button with its own loader -->
+    <div class="relative w-6 h-6">
+      <img
+        hx-get="/todos/{{this._id}}/edit?filter={{this.selectedFilter}}{{#unless this.selectedFilter}}{{@root.selectedFilter}}{{/unless}}"
+        hx-target="#todo-{{this._id}}"
+        hx-swap="outerHTML transition:true"
+        src="assets/edit.svg"
+        alt="Edit"
+        class="h-6 w-6 cursor-pointer edit-button"
+        title="Edit Todo"
+        onclick="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden')"
+      />
+      <img 
+        src="assets/bars.svg" 
+        class="spinner hidden h-6 w-6 absolute top-0 left-0" 
+        alt="Loading..."
+      />
+    </div>
 
-    <!-- Delete Button -->
-    <img
-      hx-delete="/todos/{{this._id}}?filter={{this.selectedFilter}}{{#unless this.selectedFilter}}{{@root.selectedFilter}}{{/unless}}"
-      hx-confirm="Are you sure?"
-      hx-target="#todo-{{this._id}}"
-      hx-swap="delete transition:true"
-      hx-select-oob="#filterBtns"
-      src="assets/trash.svg"
-      alt="Delete"
-      class="h-6 w-6 cursor-pointer"
-      title="Delete Todo"
-    />
+    <!-- Delete Button with loader -->
+    <div class="relative w-6 h-6">
+      <img
+        hx-delete="/todos/{{this._id}}?filter={{this.selectedFilter}}{{#unless this.selectedFilter}}{{@root.selectedFilter}}{{/unless}}"
+        {{!-- hx-confirm="Are you sure?" --}}
+        hx-target="#todo-{{this._id}}"
+        hx-swap="delete transition:true"
+        hx-select-oob="#filterBtns"
+        src="assets/trash.svg"
+        alt="Delete"
+        class="h-6 w-6 cursor-pointer delete-button"
+        title="Delete Todo"
+        onclick="if(confirm('Are you sure?')) { this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden'); }"
+      />
+      <img 
+        src="assets/bars.svg" 
+        class="spinner hidden h-6 w-6 absolute top-0 left-0" 
+        alt="Loading..."
+      />
+    </div>
   </div>
 </div>
+
+<script>
+// Update the existing afterRequest handler
+document.body.addEventListener('htmx:afterRequest', function(evt) {
+  document.querySelectorAll('.spinner').forEach(spinner => {
+    spinner.classList.add('hidden');
+    const button = spinner.previousElementSibling;
+    if (button) {
+      if (button.classList.contains('edit-button') || button.classList.contains('delete-button')) {
+        button.classList.remove('hidden');
+      } else if (button.classList.contains('checkbox-input')) {
+        button.classList.remove('invisible');
+      }
+    }
+  });
+});
+
+// Add this to handle the delete confirmation and show loader
+document.body.addEventListener('htmx:confirm', function(evt) {
+  if (evt.target.classList.contains('delete-button')) {
+    // If user confirms, show the loader
+    if (evt.detail.isConfirmed) {
+      evt.target.classList.add('hidden');
+      evt.target.nextElementSibling.classList.remove('hidden');
+    }
+  }
+});
+</script>

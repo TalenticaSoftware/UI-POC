@@ -2,7 +2,7 @@
   hx-post="/todos"
   hx-target="body"
   hx-swap="innerHTML transition:true"
-  hx-on="htmx:responseError: handleDuplicateError(event)"
+  hx-on::response-error="handleDuplicateError(event)" 
   oninput="document.getElementById('addTodoButton').disabled = !this.todo.value.trim()"
 >
   <input type="hidden" name="filter" value="{{this.selectedFilter}}" />

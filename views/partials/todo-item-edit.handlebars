@@ -22,14 +22,42 @@
       id="saveButton-{{this._id}}"
       type="submit"
       disabled
-      class="p-2 border-2 text-sm border-gray-400 rounded-md uppercase transition-all font-bold hover:bg-indigo-400 mr-2 hover:scale-105 w-1/4 disabled:bg-gray-400 disabled:cursor-not-allowed"
-    > Save</button>
+      onclick="this.querySelector('.button-text').classList.add('hidden'); this.querySelector('.spinner').classList.remove('hidden')"
+      class="p-2 w-1/4 border-2 text-sm border-gray-400 rounded-md uppercase transition-all font-bold hover:bg-indigo-400 hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
+    >
+      <span class="button-text">Save</span>
+      <img 
+        src="assets/bars.svg" 
+        class="spinner hidden h-5 w-5" 
+        alt="Loading..."
+      />
+    </button>
     <button
       hx-get="/todos/{{this._id}}?filter={{this.selectedFilter}}"
       hx-target="#todo-edit-{{this._id}}"
       hx-swap="outerHTML transition:true"
       type="button"
-      class="border-2 text-sm border-neutral-500 p-2 rounded-md uppercase font-bold transition-all hover:bg-indigo-400 mr-2 hover:scale-105 w-1/4"
-    >Cancel</button>
+      onclick="this.querySelector('.button-text').classList.add('hidden'); this.querySelector('.spinner').classList.remove('hidden')"
+      class="w-1/4 border-2 text-sm border-neutral-500 p-2 rounded-md uppercase font-bold transition-all hover:bg-indigo-400 hover:scale-105 flex items-center justify-center"
+    >
+      <span class="button-text">Cancel</span>
+      <img 
+        src="assets/bars.svg" 
+        class="spinner hidden h-5 w-5" 
+        alt="Loading..."
+      />
+    </button>
   </form>
 </div>
+
+<script>
+document.body.addEventListener('htmx:afterRequest', function(evt) {
+  document.querySelectorAll('.spinner').forEach(spinner => {
+    spinner.classList.add('hidden');
+    const buttonText = spinner.previousElementSibling;
+    if (buttonText && buttonText.classList.contains('button-text')) {
+      buttonText.classList.remove('hidden');
+    }
+  });
+});
+</script>
