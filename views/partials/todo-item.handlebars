@@ -1,37 +1,48 @@
+<!-- Main Todo Item Container -->
 <div class="flex items-center mb-4 justify-between" id="todo-{{this._id}}">
+  <!-- Left side: Checkbox and Todo Text -->
   <div class="flex items-center">
+    <!-- Checkbox Container with Loading State -->
     <div class="relative w-6 h-6 mr-4">
+      <!-- Checkbox Input with HTMX attributes -->
       <input
         name="completed"
-        hx-target="body"
-        hx-swap="innerHTML transition:true"
-        hx-patch="/todo/{{this._id}}"
+        hx-target="body"                   <!-- Update entire body on change -->
+        hx-swap="innerHTML transition:true" <!-- Smooth transition effect -->
+        hx-patch="/todo/{{this._id}}"      <!-- PATCH request to update todo status -->
         type="checkbox"
-        class="h-6 w-6 checkbox-input appearance-none border-2 border-gray-300 rounded checked:bg-blue-500 checked:border-blue-500"
-        {{#if this.completed}} checked {{/if}}
+        class="h-6 w-6 checkbox-input appearance-none border-2 border-gray-300 rounded 
+               checked:bg-blue-500 checked:border-blue-500"
+        {{#if this.completed}} checked {{/if}}  <!-- Set checked state based on todo status -->
         onclick="this.classList.add('invisible'); this.nextElementSibling.classList.remove('hidden')"
       />
+      <!-- Loading Spinner for Checkbox -->
       <img 
         src="assets/bars.svg" 
         class="spinner hidden h-4 w-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" 
         alt="Loading..."
       />
     </div>
+    <!-- Todo Text with Strike-through if Completed -->
     <div class="{{#if this.completed}}line-through{{/if}}">{{this.name}}</div>
   </div>
+
+  <!-- Right side: Edit and Delete Buttons -->
   <div class="flex gap-4 items-center relative">
-    <!-- Edit Button with its own loader -->
+    <!-- Edit Button Container -->
     <div class="relative w-6 h-6">
+      <!-- Edit Icon with HTMX attributes -->
       <img
         hx-get="/todos/{{this._id}}/edit?filter={{this.selectedFilter}}{{#unless this.selectedFilter}}{{@root.selectedFilter}}{{/unless}}"
-        hx-target="#todo-{{this._id}}"
-        hx-swap="outerHTML transition:true"
+        hx-target="#todo-{{this._id}}"     <!-- Target specific todo for update -->
+        hx-swap="outerHTML transition:true" <!-- Replace entire todo with edit form -->
         src="assets/edit.svg"
         alt="Edit"
         class="h-6 w-6 cursor-pointer edit-button"
         title="Edit Todo"
         onclick="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden')"
       />
+      <!-- Loading Spinner for Edit -->
       <img 
         src="assets/bars.svg" 
         class="spinner hidden h-6 w-6 absolute top-0 left-0" 
@@ -39,20 +50,21 @@
       />
     </div>
 
-    <!-- Delete Button with loader -->
+    <!-- Delete Button Container -->
     <div class="relative w-6 h-6">
+      <!-- Delete Icon with HTMX attributes -->
       <img
         hx-delete="/todos/{{this._id}}?filter={{this.selectedFilter}}{{#unless this.selectedFilter}}{{@root.selectedFilter}}{{/unless}}"
-        {{!-- hx-confirm="Are you sure?" --}}
-        hx-target="#todo-{{this._id}}"
-        hx-swap="delete transition:true"
-        hx-select-oob="#filterBtns"
+        hx-target="#todo-{{this._id}}"     <!-- Target specific todo for deletion -->
+        hx-swap="delete transition:true"    <!-- Remove with transition -->
+        hx-select-oob="#filterBtns"        <!-- Update filter buttons out-of-band -->
         src="assets/trash.svg"
         alt="Delete"
         class="h-6 w-6 cursor-pointer delete-button"
         title="Delete Todo"
         onclick="if(confirm('Are you sure?')) { this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden'); }"
       />
+      <!-- Loading Spinner for Delete -->
       <img 
         src="assets/bars.svg" 
         class="spinner hidden h-6 w-6 absolute top-0 left-0" 
@@ -62,13 +74,16 @@
   </div>
 </div>
 
+<!-- JavaScript Event Handlers -->
 <script>
-// Update the existing afterRequest handler
+// Handle HTMX Request Completion
 document.body.addEventListener('htmx:afterRequest', function(evt) {
+  // Find and hide all spinners after request completes
   document.querySelectorAll('.spinner').forEach(spinner => {
     spinner.classList.add('hidden');
     const button = spinner.previousElementSibling;
     if (button) {
+      // Show appropriate button based on its type
       if (button.classList.contains('edit-button') || button.classList.contains('delete-button')) {
         button.classList.remove('hidden');
       } else if (button.classList.contains('checkbox-input')) {
@@ -78,10 +93,11 @@ document.body.addEventListener('htmx:afterRequest', function(evt) {
   });
 });
 
-// Add this to handle the delete confirmation and show loader
+// Handle Delete Confirmation
 document.body.addEventListener('htmx:confirm', function(evt) {
+  // Check if delete button triggered the confirmation
   if (evt.target.classList.contains('delete-button')) {
-    // If user confirms, show the loader
+    // If user confirms deletion, show loading spinner
     if (evt.detail.isConfirmed) {
       evt.target.classList.add('hidden');
       evt.target.nextElementSibling.classList.remove('hidden');

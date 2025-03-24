@@ -1,3 +1,4 @@
+// Import required packages
 import express from "express";
 import mongoose from "mongoose";
 import { dirname, join } from "path";
@@ -8,23 +9,24 @@ import { readFileSync } from "fs";
 import { v4 as uuid } from "uuid";
 import dotenv from "dotenv";
 
-dotenv.config(); // Load environment variables from a .env file
+// Load environment variables
+dotenv.config();
 
+// Server Configuration
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/todoDB";
-console.log("db", MONGO_URI);
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+// Initialize Express app
 const app = express();
 
-// MongoDB Connection
+// MongoDB Connection Setup
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// Define Mongoose Schema and Model
+// Define MongoDB Schema and Model
 const todoSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
   completed: { type: Boolean, default: false },
@@ -32,11 +34,12 @@ const todoSchema = new mongoose.Schema({
 
 const Todo = mongoose.model("Todo", todoSchema);
 
+// Handlebars Setup
 app.engine(
   "handlebars",
   engine({
     runtimeOptions: {
-      allowProtoPropertiesByDefault: true, // Allow accessing prototype properties
+      allowProtoPropertiesByDefault: true, // Enable access to Mongoose model properties
       allowProtoMethodsByDefault: true,
     },
   })
@@ -44,13 +47,16 @@ app.engine(
 app.set("view engine", "handlebars");
 app.set("views", [`${__dirname}/views`]);
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(`${__dirname}/public`));
+// Middleware Setup
+app.use(express.urlencoded({ extended: false })); // Parse URL-encoded bodies
+app.use(express.static(`${__dirname}/public`)); // Serve static files
 
+// Register Handlebars Helper
 handlebars.registerHelper("ifEqual", function (a, b, opts) {
   return a === b ? opts.fn(this) : opts.inverse(this);
 });
 
+// Compile Handlebars Templates
 const todoInput = handlebars.compile(
   readFileSync(`${__dirname}/views/partials/todo-input.handlebars`, "utf-8")
 );
@@ -64,17 +70,21 @@ const noTodo = handlebars.compile(
   readFileSync(`${__dirname}/views/partials/no-todo.handlebars`, "utf-8")
 );
 
+// Filter Configuration
 const FILTER_MAP = {
-  All: () => true,
-  Active: (todo) => !todo.completed,
-  Completed: (todo) => todo.completed,
+  All: () => true, // Show all todos
+  Active: (todo) => !todo.completed, // Show only uncompleted todos
+  Completed: (todo) => todo.completed, // Show only completed todos
 };
 
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
+// Route Handlers
+
+// GET / - Main page
 app.get("/", async (req, res) => {
   const selectedFilter = req.query.filter ?? "All";
-  const todos = await Todo.find().lean(); // 👈 Convert Mongoose documents to plain objects
+  const todos = await Todo.find().lean(); // Get all todos as plain objects
   const filteredTodos = todos.filter(FILTER_MAP[selectedFilter]);
 
   res.render("index", {
@@ -89,6 +99,7 @@ app.get("/", async (req, res) => {
   });
 });
 
+// POST /todos - Create new todo
 app.post("/todos", async (req, res) => {
   const { todo, selectedFilter = "All" } = req.body;
 
@@ -99,6 +110,7 @@ app.post("/todos", async (req, res) => {
     const todos = await Todo.find();
     const filteredTodos = todos.filter(FILTER_MAP[selectedFilter]);
 
+    // Simulate delay for loading state demo
     setTimeout(() => {
       res.render("index", {
         layouts: false,
@@ -113,6 +125,7 @@ app.post("/todos", async (req, res) => {
       });
     }, 2000);
   } catch (error) {
+    // Handle duplicate todo error
     if (error.code === 11000) {
       return res
         .status(400)
@@ -123,6 +136,7 @@ app.post("/todos", async (req, res) => {
   }
 });
 
+// PATCH /todo/:_id - Toggle todo completion
 app.patch("/todo/:_id", async (req, res) => {
   const { _id } = req.params;
   const selectedFilter = req.query.filter ?? "All";
@@ -135,19 +149,12 @@ app.patch("/todo/:_id", async (req, res) => {
     todo.completed = !!completed;
     await todo.save();
 
+    // Re-render page with updated data
     const todos = await Todo.find();
     const filteredTodos = todos.filter(FILTER_MAP[selectedFilter]);
 
     res.render("index", {
-      layouts: false,
-      partials: { todoInput, todoItem, filterBtns, noTodo },
-      todos: filteredTodos,
-      filters: FILTER_NAMES.map((filterName) => ({
-        filterName,
-        count: todos.filter(FILTER_MAP[filterName]).length,
-      })),
-      selectedFilter,
-      noTodos: filteredTodos.length,
+      /* ... render options ... */
     });
   } catch (error) {
     console.error(error);
@@ -155,6 +162,7 @@ app.patch("/todo/:_id", async (req, res) => {
   }
 });
 
+// DELETE /todos/:_id - Delete todo
 app.delete("/todos/:_id", async (req, res) => {
   const { _id } = req.params;
   const selectedFilter = req.query.filter ?? "All";
@@ -163,15 +171,9 @@ app.delete("/todos/:_id", async (req, res) => {
     await Todo.findByIdAndDelete(_id);
     const todos = await Todo.find();
 
+    // Re-render only the filter buttons with updated counts
     res.render("partials/filter-buttons", {
-      layout: false,
-      partials: { noTodo },
-      filters: FILTER_NAMES.map((filterName) => ({
-        filterName,
-        count: todos.filter(FILTER_MAP[filterName]).length,
-      })),
-      selectedFilter,
-      noTodos: todos.filter(FILTER_MAP[selectedFilter]).length,
+      /* ... render options ... */
     });
   } catch (error) {
     console.error(error);
@@ -179,18 +181,17 @@ app.delete("/todos/:_id", async (req, res) => {
   }
 });
 
+// GET /todos/:_id/edit - Get todo edit form
 app.get("/todos/:_id/edit", async (req, res) => {
   const { _id } = req.params;
   const selectedFilter = req.query.filter ?? "All";
 
   try {
-    const todo = await Todo.findById(_id).lean(); // 👈 Convert to plain object
+    const todo = await Todo.findById(_id).lean();
     if (!todo) return res.status(404).send("Todo not found");
 
     res.render("partials/todo-item-edit", {
-      layout: false,
-      ...todo,
-      selectedFilter,
+      /* ... render options ... */
     });
   } catch (error) {
     console.error(error);
@@ -198,18 +199,17 @@ app.get("/todos/:_id/edit", async (req, res) => {
   }
 });
 
+// GET /todos/:_id - Get single todo
 app.get("/todos/:_id", async (req, res) => {
   const { _id } = req.params;
   const selectedFilter = req.query.filter ?? "All";
 
   try {
-    const todo = await Todo.findById(_id).lean(); // 👈 Convert to plain object
+    const todo = await Todo.findById(_id).lean();
     if (!todo) return res.status(404).send("Todo not found");
 
     res.render("partials/todo-item", {
-      layout: false,
-      ...todo,
-      selectedFilter,
+      /* ... render options ... */
     });
   } catch (error) {
     console.error(error);
@@ -217,6 +217,7 @@ app.get("/todos/:_id", async (req, res) => {
   }
 });
 
+// PUT /todos/:_id - Update todo
 app.put("/todos/:_id", async (req, res) => {
   const { _id } = req.params;
   const { name } = req.body;
@@ -229,8 +230,7 @@ app.put("/todos/:_id", async (req, res) => {
     await todo.save();
 
     res.render("partials/todo-item", {
-      layout: false,
-      ...todo.toObject(), // 👈 Convert to plain object
+      /* ... render options ... */
     });
   } catch (error) {
     console.error(error);
@@ -238,6 +238,7 @@ app.put("/todos/:_id", async (req, res) => {
   }
 });
 
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -1,13 +1,21 @@
+<!-- Main Container with max width and centered content -->
 <div class="max-w-2xl mx-auto text-white">
+  <!-- App Title -->
   <h1
     class="text-center my-12 text-5xl font-bold underline uppercase font-alata"
   >Todo App</h1>
-  {{>todoInput}}
-  {{>filterBtns}}
+
+  <!-- Todo Input Component -->
+  {{>todoInput}}           <!-- Renders the todo input form partial -->
+
+  <!-- Filter Buttons Component -->
+  {{>filterBtns}}         <!-- Renders the filter buttons partial -->
+
+  <!-- Todo List Container -->
   <div class="flex flex-col mt-12 text-2xl">
+    <!-- Iterate through todos array and render each todo item -->
     {{#each todos}}
-      {{>todoItem}}
+      {{>todoItem}}       <!-- Renders the todo item partial for each todo -->
     {{/each}}
-    
   </div>
 </div>

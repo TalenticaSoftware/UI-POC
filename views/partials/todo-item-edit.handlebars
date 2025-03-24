@@ -1,59 +1,80 @@
+<!-- Todo Edit Container - Unique ID for each todo item -->
 <div id="todo-edit-{{this._id}}">
+  <!-- Edit Form with HTMX attributes -->
   <form
-    hx-put="/todos/{{this._id}}"
-    hx-target="#todo-edit-{{this._id}}"
-    hx-swap="outerHTML transition:true"
+    hx-put="/todos/{{this._id}}"          <!-- Send PUT request to update todo -->
+    hx-target="#todo-edit-{{this._id}}"   <!-- Target this specific todo's container -->
+    hx-swap="outerHTML transition:true"    <!-- Replace entire element with transition -->
     class="flex items-center mb-4 justify-between gap-4"
     oninput="
+      // Handle input changes
       const saveButton = document.getElementById('saveButton-{{this._id}}');
+      // Check if the todo text has changed
       const isUnchanged = this.name.value.trim() === this.name.defaultValue.trim();
+      // Disable save button if no changes
       saveButton.disabled = isUnchanged;
+      // Toggle button styling based on changes
       saveButton.classList.toggle('border-gray-400', isUnchanged);
       saveButton.classList.toggle('border-amber-500', !isUnchanged);
     "
   >
+    <!-- Todo Text Input -->
     <input
       type="text"
-      value="{{this.name}}"
+      value="{{this.name}}"               <!-- Current todo text -->
       class="w-3/4 rounded-sm text-black p-1"
       name="name"
     />
+
+    <!-- Save Button -->
     <button
       id="saveButton-{{this._id}}"
       type="submit"
-      disabled
+      disabled                            <!-- Initially disabled -->
       onclick="this.querySelector('.button-text').classList.add('hidden'); this.querySelector('.spinner').classList.remove('hidden')"
-      class="p-2 w-1/4 border-2 text-sm border-gray-400 rounded-md uppercase transition-all font-bold hover:bg-indigo-400 hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
+      class="p-2 w-1/4 border-2 text-sm border-gray-400 rounded-md uppercase 
+             transition-all font-bold hover:bg-indigo-400 hover:scale-105 
+             disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
     >
+      <!-- Save button text and loading spinner -->
       <span class="button-text">Save</span>
       <img 
         src="assets/bars.svg" 
-        class="spinner hidden h-5 w-5" 
+        class="spinner hidden h-5 w-5"     <!-- Hidden by default -->
         alt="Loading..."
       />
     </button>
+
+    <!-- Cancel Button -->
     <button
-      hx-get="/todos/{{this._id}}?filter={{this.selectedFilter}}"
-      hx-target="#todo-edit-{{this._id}}"
-      hx-swap="outerHTML transition:true"
+      hx-get="/todos/{{this._id}}?filter={{this.selectedFilter}}"  <!-- Fetch original todo state -->
+      hx-target="#todo-edit-{{this._id}}"                          <!-- Target this todo container -->
+      hx-swap="outerHTML transition:true"                          <!-- Replace with transition -->
       type="button"
       onclick="this.querySelector('.button-text').classList.add('hidden'); this.querySelector('.spinner').classList.remove('hidden')"
-      class="w-1/4 border-2 text-sm border-neutral-500 p-2 rounded-md uppercase font-bold transition-all hover:bg-indigo-400 hover:scale-105 flex items-center justify-center"
+      class="w-1/4 border-2 text-sm border-neutral-500 p-2 rounded-md uppercase 
+             font-bold transition-all hover:bg-indigo-400 hover:scale-105 
+             flex items-center justify-center"
     >
+      <!-- Cancel button text and loading spinner -->
       <span class="button-text">Cancel</span>
       <img 
         src="assets/bars.svg" 
-        class="spinner hidden h-5 w-5" 
+        class="spinner hidden h-5 w-5"     <!-- Hidden by default -->
         alt="Loading..."
       />
     </button>
   </form>
 </div>
 
+<!-- Global Event Handler for Request Completion -->
 <script>
+// Listen for HTMX request completion
 document.body.addEventListener('htmx:afterRequest', function(evt) {
+  // Find all spinners and hide them
   document.querySelectorAll('.spinner').forEach(spinner => {
     spinner.classList.add('hidden');
+    // Show the button text again
     const buttonText = spinner.previousElementSibling;
     if (buttonText && buttonText.classList.contains('button-text')) {
       buttonText.classList.remove('hidden');
